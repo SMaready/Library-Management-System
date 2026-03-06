@@ -10,9 +10,27 @@ services:
         ports:
             - "${DB_PORT}:5432"
         volumes:
-            - postgres_data:/var/lib/postgressql/data
-        network:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
             - pg_network
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin_gui
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+        ports:
+            - "8080:80"
+        networks:
+            - pg_network
+        depends_on:
+            - db
 
 volumes:
     postgres_data:
+
+networks:
+  pg_network:
+    driver: bridge
