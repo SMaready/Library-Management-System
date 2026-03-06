@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //Set window size to take up whole screen with borders
     this->setWindowState(Qt::WindowMaximized);
 }
 
